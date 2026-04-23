@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5000"
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+    command: node src/index.js
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: taskdb
+    ports:
+      - "5432:5432"
