@@ -1,6 +1,6 @@
 const pool = require("../config/db");
 
-// ✅ CREATE TASK
+//  CREATE TASK
 exports.createTask = async (req, res) => {
   try {
     const { title, description } = req.body;
@@ -23,7 +23,7 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// ✅ GET TASKS
+//  GET TASKS
 exports.getTasks = async (req, res) => {
   try {
     let result;
@@ -49,7 +49,7 @@ exports.getTasks = async (req, res) => {
   }
 };
 
-// ✅ DELETE TASK
+// DELETE TASK
 exports.deleteTask = async (req, res) => {
   try {
     const { id } = req.params;

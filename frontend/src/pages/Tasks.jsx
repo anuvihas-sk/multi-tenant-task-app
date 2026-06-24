@@ -19,7 +19,7 @@ export default function Tasks() {
     fetchTasks();
   }, []);
 
-  // ✅ CREATE TASK
+  //  CREATE TASK
   const createTask = async () => {
     await axios.post(
       "http://localhost:5000/tasks",
@@ -32,7 +32,7 @@ export default function Tasks() {
     fetchTasks(); // refresh
   };
 
-  // ✅ DELETE TASK
+  // DELETE TASK
   const deleteTask = async (id) => {
     await axios.delete(`http://localhost:5000/tasks/${id}`, {
       headers: { Authorization: token },
