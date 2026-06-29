@@ -1,61 +1,61 @@
-# 🧠 Multi-Tenant Task Management System
+## Setup Instructions
 
-A full-stack web application that enables multiple organizations to manage tasks securely with **Role-Based Access Control (RBAC)** and **JWT authentication**, ensuring strict **data isolation** between tenants.
+1. Clone the repository
+   git clone <repo-link>
 
----
+2. Install dependencies
+   npm install
 
-## 🚀 Features
+3. Create MySQL database
+   Run SQL commands from database.sql
 
-### 🔐 Authentication
-- User registration & login
-- Secure authentication using **JWT (JSON Web Tokens)**
+4. Configure database connection in db.js
 
-### 🏢 Multi-Tenancy
-- Each user belongs to an **organization**
-- Data is strictly isolated using `org_id`
+5. Start the server
+     node index.js
+   Start the UI
+     npm run dev
 
-### 👥 Role-Based Access Control (RBAC)
-- **Admin**
-  - Can view & manage all tasks in the organization
-- **Member**
-  - Can manage only tasks created by them
+## Database Setup
 
-### 📋 Task Management (CRUD)
-- Create tasks
-- View tasks
-- Update tasks
-- Delete tasks
+Run this in MySQL:
 
-### 📜 Audit Logs
-- Tracks actions like:
-  - Task creation
-  - Task deletion
-  - Updates
-- Stored in `audit_logs` table
+CREATE DATABASE auth_app;
 
-### 🐳 Docker Support
-- Containerized backend and database using Docker
-- Easy setup using `docker-compose`
+USE auth_app;
 
----
+CREATE DATABASE auth_app;
 
-## 🛠️ Tech Stack
+USE auth_app;
 
-### Frontend
-- React (Vite)
-- Axios
-- React Router
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    org_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
-### Backend
-- Node.js
-- JWT (jsonwebtoken)
+CREATE TABLE tasks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_by INT,
+    org_id INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
-### Database
-- PostgreSQL
+    FOREIGN KEY (created_by) REFERENCES users(id)
+);
 
-### DevOps
-- Docker
-- Docker Compose
+CREATE TABLE audit_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    action VARCHAR(100) NOT NULL,
+    user_id INT,
+    task_id INT,
+    org_id INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
----
-
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (task_id) REFERENCES tasks(id)
+);
