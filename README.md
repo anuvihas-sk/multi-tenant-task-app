@@ -12,7 +12,7 @@ npm install
 docker compose up -d
 
 4. Create database tables  
-docker exec -i multi-tenant-task-app_db_1 psql -U postgres -d taskdb < database.sql
+docker exec -i multi-tenant-task-app_db_1 psql -U postgres -d taskdb 
 
 5. Configure database connection in db.js
 
