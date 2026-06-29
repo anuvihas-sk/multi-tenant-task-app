@@ -1,28 +1,28 @@
-## Setup Instructions
+# 📌 Multi-Tenant Task App
 
-1. Clone the repository
-   git clone <repo-link>
+## 🚀 Setup Instructions
 
-2. Install dependencies
-   npm install
+1. Clone the repository  
+git clone <...>
 
-3. Create MySQL database
-   Run SQL commands from database.sql
+2. Install dependencies  
+npm install
+
+3. Create MySQL database  
+Run SQL commands from database.sql
 
 4. Configure database connection in db.js
 
-5. Start the server
-     node index.js
-   Start the UI
-     npm run dev
+5. Start backend server  
+node index.js
 
-## Database Setup
+6. Start frontend UI  
+npm run dev
+
+
+## 🛢️ Database Setup
 
 Run this in MySQL:
-
-CREATE DATABASE auth_app;
-
-USE auth_app;
 
 CREATE DATABASE auth_app;
 
@@ -44,7 +44,6 @@ CREATE TABLE tasks (
     created_by INT,
     org_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     FOREIGN KEY (created_by) REFERENCES users(id)
 );
 
@@ -55,7 +54,6 @@ CREATE TABLE audit_logs (
     task_id INT,
     org_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (task_id) REFERENCES tasks(id)
 );
